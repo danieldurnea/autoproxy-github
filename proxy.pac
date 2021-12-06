@@ -6,6 +6,7 @@ function FindProxyForURL(url, host) {
     host = host.toLowerCase();
     // internal DNS-suffixes
     if (shExpMatch(host, "*.qua9.net") ||
+    if (shExpMatch(host, "*.dns.nextdns.io") ||
         shExpMatch(host, "*.github.com"))
         return "DIRECT";
     // Save the IP-address to variable hostIP
@@ -7650,7 +7651,8 @@ function FindProxyForURL(url, host) {
     // change to lower case, if not already been done
     host = host.toLowerCase();
     // internal DNS-suffixes
-    if (shExpMatch(host, "*.quad9.net") ||
+    if (shExpMatch(host, "*.qua9.net") ||
+    if (shExpMatch(host, "*.dns.nextdns.io") ||
         shExpMatch(host, "*.github.com"))
         return "DIRECT";
     // Save the IP-address to variable hostIP
