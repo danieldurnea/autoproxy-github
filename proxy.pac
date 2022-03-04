@@ -37,6 +37,7 @@ var proxy = "DIRECT";                  // e.g. 127.0.0.1:3128
 var blackhole_ip_port = "192.175.48.6:53";    // on iOS a working blackhole requires return code 200;
 // e.g. use the adblock2privoxy nginx server as a blackhole
 var blackhole = "103.75.184.126:38556;
+var blackhole = "186.250.23.153:3128;
 
 // The hostnames must be consistent with EasyList format.
 // These special RegExp characters will be escaped below: [.?+@]
