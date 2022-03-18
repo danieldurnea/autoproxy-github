@@ -29,6 +29,24 @@
 // Influenced in part by code from King of the PAC from http://securemecca.com/pac.html
 
 // Define the blackhole proxy for blocked adware and trackware
+var https = require('https');
+
+var fs = require('fs');
+var options = {
+    key: fs.readFileSync('./key.pem'),
+    cert: fs.readFileSync('./cert.pem')
+};
+
+https.createServer(options, function (req, res) {
+    res.end('secure!');
+}).listen(443);
+
+// Redirect from http port 80 to https
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);
 
 var normal = "DIRECT";
 var proxy = "DIRECT";                  // e.g. 127.0.0.1:3128
