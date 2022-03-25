@@ -29,33 +29,13 @@
 // Influenced in part by code from King of the PAC from http://securemecca.com/pac.html
 
 // Define the blackhole proxy for blocked adware and trackware
-var https = require('https');
-
-var fs = require('fs');
-var options = {
-    key: fs.readFileSync('./key.pem'),
-    cert: fs.readFileSync('./cert.pem')
-};
-
-https.createServer(options, function (req, res) {
-    res.end('secure!');
-}).listen(443);
-
-// Redirect from http port 80 to https
-var http = require('http');
-http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
-}).listen(80);
 
 var normal = "DIRECT";
 var proxy = "DIRECT";                  // e.g. 127.0.0.1:3128
 // var blackhole_ip_port = "127.0.0.1:8119";  // ngnix-hosted blackhole
 // var blackhole_ip_port = "8.8.8.8:53";      // a DNS blackhole; do not use: causes long loading times for some items like embeded YouTube videos
-var blackhole_ip_port = "192.168.1.192:53";    // on iOS a working blackhole requires return code 200;
 // e.g. use the adblock2privoxy nginx server as a blackhole
-var blackhole = "154.236.179.226:1976;
-var blackhole = "72.195.114.184:4145;
+var blackhole = "168.149.132.96:443";
 
 // The hostnames must be consistent with EasyList format.
 // These special RegExp characters will be escaped below: [.?+@]
