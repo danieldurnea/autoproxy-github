@@ -7142,7 +7142,7 @@ else if (
    // Zoom
    dnsDomainIs(host, ".zoom.us")
 )
-        return "DIRECT";
+        return "127.0.0.1:8118";
 else
         return EasyListFindProxyForURL(url, host);
 }
