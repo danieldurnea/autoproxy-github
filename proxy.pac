@@ -7142,7 +7142,7 @@ else if (
    // Zoom
    dnsDomainIs(host, ".zoom.us")
 )
-        return "127.0.0.1:3128";
+        return "192.168.1.192:8118";
 else
         return EasyListFindProxyForURL(url, host);
 }
