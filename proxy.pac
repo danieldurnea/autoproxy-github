@@ -32,7 +32,7 @@
 // Define the blackhole proxy for blocked adware and trackware
 
 var normal = "DIRECT";
-var proxy = "DIRECT";                  // e.g. 127.0.0.1:3128
+var proxy = "192.168.1.192:8118";                  // e.g. 127.0.0.1:3128
 // var blackhole_ip_port = "127.0.0.1:8119";  // ngnix-hosted blackhole
 // var blackhole_ip_port = "8.8.8.8:53";      // a DNS blackhole; do not use: causes long loading times for some items like embeded YouTube videos
 // e.g. use the adblock2privoxy nginx server as a blackhole
