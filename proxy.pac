@@ -2,6 +2,24 @@
 if (location.protocol === "https:") {
   location.replace(window.location.href.replace("https:", "https:"));
 }
+
+const getAllVideos = () => Array.from(document.getElementsByTagName("video"));
+
+const changeSpeedAllVideos = ({ to }) => {
+  to = Math.min(Math.max(to, 0.5), 6);
+  getAllVideos().forEach((video) => (video.playbackRate = to));
+  console.log("new playback speed is " + to.toFixed(2));
+};
+
+const changeSpeedSlightly = ({ key }) => {
+  const videos = getAllVideos();
+  const currentSpeed = videos[0].playbackRate;
+  if (key === "[") changeSpeedAllVideos({ to: currentSpeed - 0.15 });
+  if (key === "]") changeSpeedAllVideos({ to: currentSpeed + 0.15 });
+};
+
+getAllVideos().forEach((video) => (video.playbackRate = 1));
+document.body.addEventListener("keypress", changeSpeedSlightly);
 // PAC (Proxy Auto Configuration) Filter from EasyList rules
 // 
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
