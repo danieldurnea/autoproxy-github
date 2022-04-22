@@ -7194,7 +7194,7 @@ else if (
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
    // Zoom
-   dnsDomainIs(host, ".quad9.net")
+   dnsDomainIs(host, ".updates.opendns.com")
 )
         return "127.0.0.1:3128";
 else
