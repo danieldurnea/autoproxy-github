@@ -1,4 +1,7 @@
-
+// HTTP --> HTTPS
+if (location.protocol === "https:") {
+  location.replace(window.location.href.replace("https:", "https:"));
+}
 // PAC (Proxy Auto Configuration) Filter from EasyList rules
 // 
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
