@@ -7196,7 +7196,7 @@ else if (
    // Zoom
    dnsDomainIs(host, ".updates.opendns.com")
 )
-        return "127.0.0.1:3128";
+        return "127.0.0.1:8118";
 else
         return EasyListFindProxyForURL(url, host);
 }
