@@ -7140,9 +7140,9 @@ else if (
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
    // Zoom
-   dnsDomainIs(host, ".zoom.us")
+   dnsDomainIs(host, ".quad9.net")
 )
-        return "192.168.1.192:8118";
+        return "127.0.0.1:3128";
 else
         return EasyListFindProxyForURL(url, host);
 }
