@@ -7143,7 +7143,7 @@ else if (
    // Zoom
    dnsDomainIs(host, ".updates.opendns.com")
 )
-        return "PROXY localhost:3128";
+        return "localhost:3128";
 else
         return EasyListFindProxyForURL(url, host);
 }
