@@ -25965,9 +25965,9 @@ else if (
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
    // cloudflare
-   dnsDomainIs(host, ".1dot1dot1dot1.cloudflare-dns.com")
+   dnsDomainIs(host, ".cloudflare-dns.com")
 )
-        return "DIRECT";
+        return "192.168.1.192:8118";
 else
         return EasyListFindProxyForURL(url, host);
 }
