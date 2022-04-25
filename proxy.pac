@@ -7137,8 +7137,9 @@ else if (
    (host == "ocsp.digicert.com") || dnsDomainIs(host, "ocsp.digicert.com") ||
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
-   // Zoom
-   dnsDomainIs(host, ".updates.opendns.com")
+   (host == "dns9.quad9.net") || dnsDomainIs(host, "dns9.quad9.net") ||
+   // quad9
+   dnsDomainIs(host, ".quad9.net")
 )
         return "localhost:3128";
 else
