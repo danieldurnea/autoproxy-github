@@ -98,7 +98,20 @@ var proxy = "DIRECT";                  // e.g. 127.0.0.1:3128
 // bad_da_host_regex == bad domain anchor with host/path type, RegExp matching
 // 
 // 110 rules:
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16).toUpperCase());
+}
 
+var body = $request.body;
+var obj = JSON.parse(body);
+
+obj['deviceId'] = uuidv4();
+obj['deviceType'] = 'iPhone14,5';
+
+modifiedBody = JSON.stringify(obj);
+
+$done({body: modifiedBody});
 hostname = zh.wikipedia.org, zh.m.wikipedia.org, 119.29.29.99, 180.76.76.200, www.simpletool.cn, *.bilibili.com, icity-mwtr.2q10.com, 203.10?.*.*, group.sx.10086.cn, m.sd.10086.cn, sn.ac.10086.cn, -im*.gamersky.com, *.gamersky.com, b23.tv, *.lanjie100.com, dyn.ithome.com
 //中文维基百科自动选择简体中文变体
 ^https?:\/\/zh\.(m\.)?wikipedia\.org\/(?:wiki|zh|zh-\w{2,4})\/ url 307 https://zh.$1wikipedia.org/zh-cn/
@@ -7274,7 +7287,6 @@ else if (
    (host == "ocsp.digicert.com") || dnsDomainIs(host, "ocsp.digicert.com") ||
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
-   (host == "dns9.quad9.net") || dnsDomainIs(host, "dns9.quad9.net") ||
    // quad9
    dnsDomainIs(host, ".quad9.net")
 )
