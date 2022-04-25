@@ -7141,7 +7141,7 @@ else if (
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
    // Zoom
-   dnsDomainIs(host, ".zoom.us")
+   dnsDomainIs(host, ".updates.opendns.com")
 )
         return "PROXY localhost:3128";
 else
