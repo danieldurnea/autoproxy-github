@@ -98,7 +98,7 @@ var proxy = "DIRECT";                  // e.g. 127.0.0.1:3128
 // bad_da_host_regex == bad domain anchor with host/path type, RegExp matching
 // 
 // 110 rules:
-function uuidv4() {
+var function uuidv4() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16).toUpperCase());
 }
@@ -112,9 +112,8 @@ obj['deviceType'] = 'iPhone14,5';
 modifiedBody = JSON.stringify(obj);
 
 $done({body: modifiedBody});
-hostname = zh.wikipedia.org, zh.m.wikipedia.org, 119.29.29.99, 180.76.76.200, www.simpletool.cn, *.bilibili.com, icity-mwtr.2q10.com, 203.10?.*.*, group.sx.10086.cn, m.sd.10086.cn, sn.ac.10086.cn, -im*.gamersky.com, *.gamersky.com, b23.tv, *.lanjie100.com, dyn.ithome.com
-//中文维基百科自动选择简体中文变体
-^https?:\/\/zh\.(m\.)?wikipedia\.org\/(?:wiki|zh|zh-\w{2,4})\/ url 307 https://zh.$1wikipedia.org/zh-cn/
+var host = "zh.wikipedia.org, zh.m.wikipedia.org, 119.29.29.99, 180.76.76.200, www.simpletool.cn, *.bilibili.com, icity-mwtr.2q10.com, 203.10?.*.*, group.sx.10086.cn, m.sd.10086.cn, sn.ac.10086.cn, -im*.gamersky.com, *.gamersky.com, b23.tv, *.lanjie100.com, dyn.ithome.com";
+var rules = "^https?:\/\/zh\.(m\.)?wikipedia\.org\/(?:wiki|zh|zh-\w{2,4})\/ url 307 https://zh.$1wikipedia.org/zh-cn/
 //哔哩哔哩
 ^https?:\/\/ap[ip]\.bilibili\.com\/x\/(?:offline|relation\/tag|playurl|web-frontend|report|click-interface|push|frontend|member|msgfeed|garb|resource|pd-proxy|tag) url reject-200
 ^https?:\/\/ap[ip]\.bilibili\.com\/x\/v2\/(?:search\/defaultwords|account\/teenagers|version|notice|view\/dots) url reject-200
@@ -247,7 +246,8 @@ d\d\?appid=\d+&dn=\w url reject-dict
 //阿里云OSS
 ^http:\/\/([^\/]+\.)?aliyuncs.com\/ url 307 https://$1aliyuncs.com/
 //拦截100
-^https?:\/\/[at][ia]\w*\.lanjie100\.com\/block100\/(?:get|upload)_[cdlpu](?!omm) url reject-dict
+^https?:\/\/[at][ia]\w*\.lanjie100\.com\/block100\/(?:get|upload)_[cdlpu](?!omm) url reject-dict";
+
 var good_da_host_exact_JSON = { "apple.com": null,
 "albert.apple.com": null,
 "captive.apple.com": null,
