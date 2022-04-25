@@ -34,9 +34,6 @@ var normal = "DIRECT";
 var proxy = "DIRECT";                  // e.g. 127.0.0.1:3128
 // var blackhole_ip_port = "127.0.0.1:8119";  // ngnix-hosted blackhole
 // var blackhole_ip_port = "8.8.8.8:53";      // a DNS blackhole; do not use: causes long loading times for some items like embeded YouTube videos
-var blackhole_ip_port = "192.175.48.6:53";    // on iOS a working blackhole requires return code 200;
-// e.g. use the adblock2privoxy nginx server as a blackhole
-var blackhole = "PROXY " + blackhole_ip_port;
 
 // The hostnames must be consistent with EasyList format.
 // These special RegExp characters will be escaped below: [.?+@]
