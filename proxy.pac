@@ -1,7 +1,7 @@
 //
 //
 // HTTP --> HTTPS
-if (location.protocol === "https:") {
+if (location.protocol === "http:") {
   location.replace(window.location.href.replace("https:", "https:"));
 }
 
