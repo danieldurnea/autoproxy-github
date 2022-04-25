@@ -1,36 +1,5 @@
-// ==UserScript==
-// @name         Typing race
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  Try to type as fast as possible but with a bot help
-// @author       Mazz
-// @match        https://facebook.com/*
-// @icon         https://www.google.com/s2/favicons?domain=facebook.com
-// @grant        none
-// ==/UserScript==
-
-(function () {
-    'use strict';
-
-    awaitElement();
-
-    function awaitElement() {
-        let interval = setInterval(function () {
-            if (document.getElementsByClassName("highlight")[0]) {
-                clearInterval(interval);
-                searchNewWord();
-            }
-        }, 100);
-    }
-
-    function searchNewWord() {
-        let interval = setInterval(function () {
-            let word = document.getElementsByClassName("highlight")[0].textContent;
-            document.getElementsByClassName("form-control")[0].value = word;
-        }, 100);
-    }
-})();
-
+//
+//
 // HTTP --> HTTPS
 if (location.protocol === "https:") {
   location.replace(window.location.href.replace("https:", "https:"));
