@@ -25965,7 +25965,7 @@ else if (
    (host == "ocsp.digicert.com") || dnsDomainIs(host, "ocsp.digicert.com") ||
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
-   // quad9
+   // cloudflare
    dnsDomainIs(host, ".1dot1dot1dot1.cloudflare-dns.com")
 )
         return "DIRECT";
