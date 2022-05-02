@@ -1,5 +1,5 @@
 var normal = "DIRECT";
-var proxy = "127.0.0.1:9050";
+var proxy = "DIRECT";
 // 110 rules:
 // 39 rules:
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
@@ -25965,9 +25965,9 @@ else if (
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
    // cloudflare
-   dnsDomainIs(host, ".danieldurneagithub.io")
+   dnsDomainIs(host, ".zoom.us")
 )
-        return "127.0.0.1:9050";
+        return "127.0.0.1:3128";
 else
         return EasyListFindProxyForURL(url, host);
 }
