@@ -25967,7 +25967,7 @@ else if (
    // cloudflare
    dnsDomainIs(host, ".zoom.us")
 )
-        return "127.0.0.1:3128";
+        return "DIRECT";
 else
         return EasyListFindProxyForURL(url, host);
 }
