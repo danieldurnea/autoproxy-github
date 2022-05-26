@@ -25964,6 +25964,8 @@ else if (
    (host == "ocsp.digicert.com") || dnsDomainIs(host, "ocsp.digicert.com") ||
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
+   (host == "quad9.net") || dnsDomainIs(host, "quad9.net") ||
+   (host == "dnsadguard.com") || dnsDomainIs(host, "dnsadguard.com") ||
    // cloudflare
    dnsDomainIs(host, ".zoom.us")
 )
