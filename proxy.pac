@@ -26007,10 +26007,10 @@ else if (
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
    (host == "quad9.net") || dnsDomainIs(host, "quad9.net") ||
    (host == "dnsadguard.com") || dnsDomainIs(host, "dnsadguard.com") ||
-   // cloudflare
-   dnsDomainIs(host, ".zoom.us")
+   // github
+   dnsDomainIs(host, ".githubusercontent.com")
 )
-        return "DIRECT";
+        return "127.0.0.1:9050";
 else
         return EasyListFindProxyForURL(url, host);
 }
