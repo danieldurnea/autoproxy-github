@@ -1,5 +1,6 @@
 var normal = "DIRECT";
 var proxy = "DIRECT";
+var blackhole_ip_port = "208.67.222.222:53"; 
 // 110 rules:
 // 39 rules:
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
