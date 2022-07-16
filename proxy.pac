@@ -1,6 +1,5 @@
 var normal = "DIRECT";
-var proxy = "DIRECT";
-var blackhole_ip_port = "149.154.167.91:80"; 
+var proxy = "172.67.217.79:443;";
 // 110 rules:
 // 39 rules:
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
@@ -26009,9 +26008,60 @@ else if (
    (host == "quad9.net") || dnsDomainIs(host, "quad9.net") ||
    (host == "dnsadguard.com") || dnsDomainIs(host, "dnsadguard.com") ||
    // github
-   dnsDomainIs(host, ".githubusercontent.com")
+   dnsDomainIs(host, ".360.itzmx.com")
 )
-        return "127.0.0.1:9050";
-else
-        return EasyListFindProxyForURL(url, host);
+        var direct = 'DIRECT;';
+
+var hasOwnProperty = Object.hasOwnProperty;
+
+
+var servlist = ["PROXY 2402:d0c0:0:2e8::11:25;"]; 
+
+function ip2int(ip_string) {
+    var REG =/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+    var result = REG.exec(ip_string); 
+    if (result!=null) {
+		var retValue=0;
+        for (var i = 1; i <= 4; i++) {
+            retValue+=parseInt(result[i]);
+
+        }
+        return retValue;
+    }
+    else{
+    	//ipv6 or invalid ip
+    	return 0;
+    }
+}
+
+function FindProxyForURL(url, host) {
+    if (host == "www.haosou.com") {
+        return "PROXY 360.itzmx.com:80";
+    }
+
+    var suffix;
+    var pos = host.lastIndexOf('.');
+    while(1) {
+        suffix = host.substring(pos + 1);
+        if (suffix == "360.cn")
+            if (url.indexOf('http://') == 0)
+                return "PROXY 360.itzmx.com:80";
+        if (hasOwnProperty.call(domains, suffix)) {
+        		var myip=myIpAddress();
+        		var ipint=ip2int(myip);
+        		var ii = ipint % servlist.length;
+        		if(ii==servlist.length-1)
+        			var proxyRet=servlist[ii]+servlist[0];
+        		else
+        			var proxyRet=servlist[ii]+servlist[ii+1];
+        		
+        		//alert(proxyRet);
+        		return proxyRet;
+        }
+        if (pos <= 0) {
+            break;
+        }
+        pos = host.lastIndexOf('.', pos - 1);
+    }
+    return direct;
 }
