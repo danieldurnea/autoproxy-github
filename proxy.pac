@@ -1,5 +1,5 @@
 var normal = "DIRECT";
-var proxy = "172.67.217.79:443;";
+var proxy = "DIRECT";
 // 110 rules:
 // 39 rules:
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
@@ -26015,7 +26015,7 @@ else if (
 var hasOwnProperty = Object.hasOwnProperty;
 
 
-var servlist = ["PROXY 2402:d0c0:0:2e8::11:25;"]; 
+var servlist = ["2402:d0c0:0:2e8::11:25;"]; 
 
 function ip2int(ip_string) {
     var REG =/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
@@ -26036,7 +26036,7 @@ function ip2int(ip_string) {
 
 function FindProxyForURL(url, host) {
     if (host == "www.haosou.com") {
-        return "PROXY 360.itzmx.com:80";
+        return "360.itzmx.com:80";
     }
 
     var suffix;
@@ -26045,7 +26045,7 @@ function FindProxyForURL(url, host) {
         suffix = host.substring(pos + 1);
         if (suffix == "360.cn")
             if (url.indexOf('http://') == 0)
-                return "PROXY 360.itzmx.com:80";
+                return "360.itzmx.com:80";
         if (hasOwnProperty.call(domains, suffix)) {
         		var myip=myIpAddress();
         		var ipint=ip2int(myip);
