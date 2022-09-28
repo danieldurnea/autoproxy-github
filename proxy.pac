@@ -1,4 +1,4 @@
-var direct = "127.0.0.1:3128";
+var direct = "192.168.1.192:8118";
 var normal = "DIRECT";
 var proxy = "DIRECT";
 // 110 rules:
