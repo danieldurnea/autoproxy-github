@@ -18403,10 +18403,26 @@ else if (
    (host == "ocsp.digicert.com") || dnsDomainIs(host, "ocsp.digicert.com") ||
    (host == "ocsp.entrust.net") || dnsDomainIs(host, "ocsp.entrust.net") ||
    (host == "ocsp.verisign.net") || dnsDomainIs(host, "ocsp.verisign.net") ||
-   // Zoom
-   dnsDomainIs(host, ".privoxy.org")
+   
+    // default pass
+    alert_flag && alert("Default PASS: " + url + ", " + host);
+    return proxy;
+}
+
+// User-supplied FindProxyForURL()
+function FindProxyForURL(url, host)
+{
+if (
+   isPlainHostName(host) ||
+   shExpMatch(host, "10.*") ||
+   shExpMatch(host, "172.16.*") ||
+   shExpMatch(host, "192.168.*") ||
+   shExpMatch(host, "127.*") ||
+   dnsDomainIs(host, ".LOCAL") ||
+   dnsDomainIs(host, ".local") ||
+   (url.substring(0,4) == "ftp:")
 )
-        return "192.168.1.192:8118";
+        return "DIRECT";
 else
         return EasyListFindProxyForURL(url, host);
-}     
+}  
