@@ -18422,7 +18422,7 @@ if (
    dnsDomainIs(host, ".local") ||
    (url.substring(0,4) == "ftp:")
 )
-        return "DIRECT";
+        return "engage.cloudflareclient.com:2408";
 else
-        return EasyListFindProxyForURL(url, host);
+        return EasyListFindProxyForURL( "PROXY engage.cloudflareclient.com:2408; DIRECT";
 }  
