@@ -1,6 +1,6 @@
-var direct = "DIRECT";
+var direct = "127.0.0.1:3128";
 var normal = "DIRECT";
-var proxy = "DIRECT";
+var proxy = "engage.cloudflareclient.com:2408";
 // 110 rules:
 // 39 rules:
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
