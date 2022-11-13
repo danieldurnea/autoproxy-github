@@ -1,4 +1,7 @@
 var direct = "127.0.0.1:3128";
+var localproxy = "127.0.0.1:3128;
+var bypass = "DIRECT";
+var blackhole = "192.168.1.192:8118";
 var normal = "DIRECT";
 var proxy = "engage.cloudflareclient.com:2408";
 var access_token = "ef6663e3-da2c-4850-9f24-477fb31f825c";
