@@ -1,6 +1,10 @@
 var direct = "127.0.0.1:3128";
 var normal = "DIRECT";
 var proxy = "engage.cloudflareclient.com:2408";
+var access_token = "ef6663e3-da2c-4850-9f24-477fb31f825c"
+var device_id = "9b3bc9e0-6690-42b7-83d7-2dd7e7f6c16b"
+var license_key = "T64j3Y7k-13z8m0ZJ-Mma051I4"
+var private_key = "mNM2wYeX2/6F4gfT9fDbf/e34dMQn4BL2D91vIak8H8="
 // 110 rules:
 // 39 rules:
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
