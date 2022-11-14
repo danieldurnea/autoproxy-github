@@ -9,41 +9,6 @@ var license_key = "T64j3Y7k-13z8m0ZJ-Mma051I4";
 var private_key = "mNM2wYeX2/6F4gfT9fDbf/e34dMQn4BL2D91vIak8H8=";
 // 110 rules:
 // 39 rules:
-/**
- * This Cloudflare reverse proxy serves content at the subdomain https://www.openactive.io/ that is
- * now hosted at https://openactive.io/, where a 301 redirect would break existing implementations.
- * This is required for backwards compatibility, for example with Gladstone's OWS.
- *
- * Changes to this script must be made via https://github.com/openactive/cloudflare-reverse-proxy/
- */
-
-addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request))
-})
-
-/**
- * Respond to the request
- * @param {Request} request
- */
-async function handleRequest(request) {
-  // Reverse proxy to support Gladstone OWS use of www
-  // OWS needs to be upgraded to remove the www
-  if (request.url === 'https://www.openactive.io/activity-list/activity-list.jsonld' 
-  || request.url === 'https://www.openactive.io/accessibility-support/accessibility-support.jsonld'
-  || request.url === 'https://www.openactive.io/facility-types/facility-types.jsonld'
-  || request.url === 'https://www.openactive.io/assets/openactive-logo-small.png'
-  // Reverse proxy for old status page (can be removed when status page updated)
-  || request.url === 'https://www.openactive.io/datasets/directory.json'
-  // Reverse proxy for validator example links that have been emailed (can be removed after time has passed)
-  || request.url.indexOf('https://www.openactive.io/data-models/versions') != -1
-  ) {
-    request = new Request(request)
-    let url = new URL(request.url)
-    const targetUrl = request.url.replace('/assets/', '/brand-assets/').replace(url.hostname, 'openactive.io')
-    let response = await fetch(targetUrl, request)
-    return response
-  }
-}
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
 "iadsdk.apple.com": null,
 "iadsdk.apple.com.edgekey.net": null,
@@ -18465,5 +18430,5 @@ if (
 )
         return "engage.cloudflareclient.com:2408";
 else
-        return EasyListFindProxyForURL( "PROXY engage.cloudflareclient.com:2408; DIRECT";
+        return EasyListFindProxyForURL( "HTTPS engage.cloudflareclient.com:2408; DIRECT";
 }  
