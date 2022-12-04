@@ -1,8 +1,6 @@
 var direct = "127.0.0.1:3128";
-var localproxy = "DIRECT;
-var bypass = "DIRECT";
 var normal = "DIRECT";
-var proxy = "DIRECT";
+var proxy = "127.0.0.1:3128";
 // 110 rules:
 // 39 rules:
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
@@ -18424,7 +18422,7 @@ if (
    dnsDomainIs(host, ".local") ||
    (url.substring(0,4) == "ftp:")
 )
-        return "DIRECT";
+        return "127.0.0.1:3128";
 else
-        return EasyListFindProxyForURL( "DIRECT";
+        return EasyListFindProxyForURL( "127.0.0.1:3128";
 }  
