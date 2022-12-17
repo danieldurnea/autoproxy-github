@@ -18433,11 +18433,6 @@ if ( isInNet(host, "74.125.239.37", "255.255.255.255") )
 if ( shExpMatch(host, '*.google.com') || shExpMatch(host, 'google.com') )
     return "DIRECT";
 
-// Bypass hostname/domain (of BCCA-as-IDP for SAML IDP).
-if ( (host == "qinvdc7") || 
-     (host == "qinvdc7.dom.ad.local") || 
-      dnsDomainIs(host, ".dom.ad.local") ) 
-    return "DIRECT";
 
 // Send *only* HTTP/HTTPS (80/443) traffic to Cloud.
 if ( (url.substring(0, 5) == "http:") || 
