@@ -1,4 +1,4 @@
-var direct = "DIRECT";
+var direct = "127.0.0.1:3128";
 var normal = "DIRECT";
 var proxy = "DIRECT";
 // 110 rules:
@@ -18409,20 +18409,42 @@ else if (
     return proxy;
 }
 
-// User-supplied FindProxyForURL()
 function FindProxyForURL(url, host)
 {
-if (
-   isPlainHostName(host) ||
-   shExpMatch(host, "10.*") ||
-   shExpMatch(host, "172.16.*") ||
-   shExpMatch(host, "192.168.*") ||
-   shExpMatch(host, "127.*") ||
-   dnsDomainIs(host, ".LOCAL") ||
-   dnsDomainIs(host, ".local") ||
-   (url.substring(0,4) == "ftp:")
-)
-        return "HTTPS, "DIRECT";
-else
-        return EasyListFindProxyForURL( "127.0.0.1:3128";
+    if (isPlainHostName(host))
+        return "DIRECT";
+
+    if (url.substring(0, 4) == "ftp:")
+        return "DIRECT";
+
+    if (isInNet(host, "10.0.0.0", "255.0.0.0")
+        || isInNet(host, "172.16.0.0",  "255.240.0.0")
+        || isInNet(host, "192.168.0.0", "255.255.0.0")
+        || isInNet(host, "169.254.0.0", "255.255.0.0")
+        || isInNet(host, "127.0.0.0", "255.255.255.0")
+        || isInNet(host, "23.20.0.0", "255.252.0.0"))
+        return "DIRECT";
+
+// Bypass one specific IP address (example only).
+if ( isInNet(host, "74.125.239.37", "255.255.255.255") ) 
+    return "DIRECT";
+
+// Bypass specific host (include both wildcard and non-wildcard expression).
+if ( shExpMatch(host, '*.google.com') || shExpMatch(host, 'google.com') )
+    return "DIRECT";
+
+// Bypass hostname/domain (of BCCA-as-IDP for SAML IDP).
+if ( (host == "qinvdc7") || 
+     (host == "qinvdc7.dom.ad.local") || 
+      dnsDomainIs(host, ".dom.ad.local") ) 
+    return "DIRECT";
+
+// Send *only* HTTP/HTTPS (80/443) traffic to Cloud.
+if ( (url.substring(0, 5) == "http:") || 
+     (url.substring(0, 6) == "https:") ) 
+    return "PROXY proxy.threatpulse.net:8080; DIRECT";
+
+return "DIRECT";
+}
+urn EasyListFindProxyForURL( "127.0.0.1:3128";
 }  
