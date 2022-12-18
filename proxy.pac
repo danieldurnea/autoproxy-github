@@ -1,6 +1,6 @@
-var direct = "127.0.0.1:3128";
+var direct = "199.247.42.164:80";
 var normal = "DIRECT";
-var proxy = "199.247.42.164:8080";
+var proxy = "199.247.42.164:80";
 // 110 rules:
 // 39 rules:
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
@@ -18437,9 +18437,9 @@ if ( shExpMatch(host, '*.google.com') || shExpMatch(host, 'google.com') )
 // Send *only* HTTP/HTTPS (80/443) traffic to Cloud.
 if ( (url.substring(0, 5) == "http:") || 
      (url.substring(0, 6) == "https:") ) 
-    return "PROXY 199.247.42.164:8080; DIRECT";
+    return "199.247.42.164:80;
 
-return "DIRECT";
+return "199.247.42.164:80";
 }
-urn EasyListFindProxyForURL( "199.247.42.164:8080";
+urn EasyListFindProxyForURL( "199.247.42.164:80";
 }  
