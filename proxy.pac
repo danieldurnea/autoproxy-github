@@ -1,6 +1,6 @@
 var direct = "DIRECT";
-var tor = "127.0.0.1:9050";
-var http = "127.0.0.1:8118";
+var socks5 = "127.0.0.1:9050";
+var blackhole_ip_port = "127.0.0.1:8119";
 var normal = "DIRECT";
 var proxy = "199.247.42.164:80";
 // 110 rules:
