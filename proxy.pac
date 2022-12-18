@@ -1,4 +1,5 @@
 var direct = "199.247.42.164:80";
+var tor = "SOCKS 127.0.0.1:9050";
 var normal = "DIRECT";
 var proxy = "199.247.42.164:80";
 // 110 rules:
