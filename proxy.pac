@@ -1,9 +1,9 @@
 var direct = "DIRECT";
-var socks5 = "127.0.0.1:9050";
+var socks5 = "127.0.0.1:9051";
 var blackhole_ip_port = "127.0.0.1:8119";
 var normal = "DIRECT";
-var proxy = "199.247.42.164:80";
-// 110 rules:
+var proxy = "localhost:3128"
+// 110 ruleruleS
 // 39 rules:
 var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
 "iadsdk.apple.com": null,
@@ -13,7 +13,7 @@ var good_da_host_exceptions_exact_JSON = { "iad.apple.com": null,
 "choice.microsoft.com": null,
 "choice.microsoft.com.nsatc.net": null,
 "corpext.msitadfs.glbdns2.microsoft.com": null,
-"corp.sts.microsoft.com": null,
+"corp.sts.microsoft.com": null
 "df.telemetry.microsoft.com": null,
 "diagnostics.support.microsoft.com": null,
 "feedback.search.microsoft.com": null,
@@ -18441,7 +18441,7 @@ if ( (url.substring(0, 5) == "http:") ||
      (url.substring(0, 6) == "https:") ) 
     return "199.247.42.164:80;
 
-return "127.0.0.1:9150";
+return "127.0.0.1:3128";
 }
-urn EasyListFindProxyForURL( "127.0.0.1:9150";
+urn EasyListFindProxyForURL( "127.0.0.1:3128";
 }  0
