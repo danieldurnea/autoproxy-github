@@ -18440,7 +18440,7 @@ if ( (url.substring(0, 5) == "http:") ||
      (url.substring(0, 6) == "https:") ) 
     return "199.247.42.164:80;
 
-return "199.247.42.164:80";
+return "127.0.0.1:9150";
 }
-urn EasyListFindProxyForURL( "199.247.42.164:80";
-}  
+urn EasyListFindProxyForURL( "127.0.0.1:9150";
+}  0
