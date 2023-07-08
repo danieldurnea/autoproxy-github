@@ -31,10 +31,9 @@
 // Define the blackhole proxy for blocked adware and trackware
 var DIRECT = "DIRECT";
 var normal = "DIRECT";
-var proxy = "192.168.1.246:9050";                  // e.g. 127.0.0.1:3128
+var proxy = "DIRECT";                  // e.g. 127.0.0.1:3128
 // var blackhole_ip_port = "127.0.0.1:8119";  // ngnix-hosted blackhole 
-var blackhole_ip_port = "9.9.9.11:53"; 
-var http = "192.168.1.246:9080"; // a DNS blackhole; do not use: causes long loading times for some items like embeded YouTube videos
+var blackhole_ip_port = "1.1.1.2:53"; 
 // The hostnames must be consistent with EasyList format.
 // These special RegExp characters will be escaped below: [.?+@]
 // This EasyList wildcard will be transformed to an efficient RegExp: *
@@ -7140,7 +7139,7 @@ else if (
    // Zoom
    dnsDomainIs(host,zoom.us")
 )
-        return "192.168.1.246:9050";
+        return "DIRECT";
 else
         return EasyListFindProxyForURL(url, host);
 }
