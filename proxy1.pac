@@ -1,4 +1,4 @@
-// PAC (Proxy Auto Configuration) Filter from EasyList rules
+ii// PAC (Proxy Auto Configuration) Filter from EasyList rules
 // 
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
@@ -33,7 +33,8 @@ var DIRECT = "DIRECT";
 var normal = "DIRECT";
 var proxy = "127.0.0.1:3128";                  // e.g. 127.0.0.1:3128
 // var blackhole_ip_port = "127.0.0.1:8119";  // ngnix-hosted blackhole 
-var blackhole_ip_port = "104.28.193.130:443"; 
+var blackhole_ip_port = "8.8.8.8:53"; 
+var blackhole = "8.8.8.8:53"; 
 // The hostnames must be consistent with EasyList format.
 // These special RegExp characters will be escaped below: [.?+@]
 // This EasyList wildcard will be transformed to an efficient RegExp: *
