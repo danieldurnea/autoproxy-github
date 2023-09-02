@@ -1,4 +1,4 @@
-ii// PAC (Proxy Auto Configuration) Filter from EasyList rules
+// PAC (Proxy Auto Configuration) Filter from EasyList rules
 // 
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
@@ -20,18 +20,16 @@ ii// PAC (Proxy Auto Configuration) Filter from EasyList rules
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 // If you normally use a proxy, replace "DIRECT" below with
 // "PROXY MACHINE:PORT"
 // where MACHINE is the IP address or host name of your proxy
 // server and PORT is the port number of your proxy server.
 //
 // Influenced in part by code from King of the PAC from http://securemecca.com/pac.html
-
+var proxy = "PROXY 172.67.243.247:443;";
 // Define the blackhole proxy for blocked adware and trackware
 var DIRECT = "DIRECT";
 var normal = "DIRECT";
-var proxy = "127.0.0.1:3128";                  // e.g. 127.0.0.1:3128
 // var blackhole_ip_port = "127.0.0.1:8119";  // ngnix-hosted blackhole 
 var blackhole_ip_port = "8.8.8.8:53"; 
 var blackhole = "8.8.8.8:53"; 
