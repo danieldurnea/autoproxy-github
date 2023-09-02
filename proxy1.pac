@@ -7138,7 +7138,7 @@ else if (
    // Zoom
    dnsDomainIs(host,zoom.us")
 )
-        return "DIRECT";
+        return "172.67.243.247:443";
 else
         return EasyListFindProxyForURL(url, host);
 }
