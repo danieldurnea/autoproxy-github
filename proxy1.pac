@@ -26,7 +26,7 @@
 // server and PORT is the port number of your proxy server.
 //
 // Influenced in part by code from King of the PAC from http://securemecca.com/pac.html
-var proxy = "172.67.243.247:443;";
+var proxy = "137.184.14.230:3128;";
 // Define the blackhole proxy for blocked adware and trackware
 var DIRECT = "DIRECT";
 var normal = "DIRECT";
