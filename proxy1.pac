@@ -26,13 +26,13 @@
 // server and PORT is the port number of your proxy server.
 //
 // Influenced in part by code from King of the PAC from http://securemecca.com/pac.html
-var proxy = "137.184.14.230:3128;";
+var proxy = "DIRECT;";
 // Define the blackhole proxy for blocked adware and trackware
 var DIRECT = "DIRECT";
 var normal = "DIRECT";
-// var blackhole_ip_port = "127.0.0.1:811";  // ngnix-hosted blackhole 
-var blackhole_ip_port = "1.0.0.1:53"; 
-var blackhole = "1.1.1.1:53"; 
+// var blackhole_ip_port = "64.23.164.51:3128";  // ngnix-hosted blackhole 
+var blackhole_ip_port = "9.9.9.9:53"; 
+var blackhole = "8.8.8.8:53"; 
 // The hostnames must be consistent with EasyList format.
 // These special RegExp characters will be escaped below: [.?+@]
 // This EasyList wildcard will be transformed to an efficient RegExp: *
