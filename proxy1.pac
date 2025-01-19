@@ -21,12 +21,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // If you normally use a proxy, replace "DIRECT" below with
-// "PROXY MACHINE:PORT"
+// "143.198.131.174"
 // where MACHINE is the IP address or host name of your proxy
 // server and PORT is the port number of your proxy server.
 //
 // Influenced in part by code from King of the PAC from http://securemecca.com/pac.html
-var proxy = "209.38.149.36:3128;";
+var proxy = "143.198.131.174:3128;";
 // Define the blackhole proxy for blocked adware and trackware
 var DIRECT = "DIRECT";
 var normal = "DIRECT";
