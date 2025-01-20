@@ -21,14 +21,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // If you normally use a proxy, replace "DIRECT" below with
-// "143.198.131.174"
+// "143.110.222.153:3128"
 // where MACHINE is the IP address or host name of your proxy
 // server and PORT is the port number of your proxy server.
 //
 // Influenced in part by code from King of the PAC from http://securemecca.com/pac.html
 var proxy = "143.198.131.174:3128;";
 // Define the blackhole proxy for blocked adware and trackware
-var DIRECT = "DIRECT";
+var DIRECT = "143.110.222.153:3128";
 var normal = "DIRECT";
 // var blackhole_ip_port = "8.8.8.8:53";  // ngnix-hosted blackhole 
 var blackhole_ip_port = "9.9.9.9:53"; 
@@ -7138,7 +7138,7 @@ else if (
    // Zoom
    dnsDomainIs(host,zoom.us")
 )
-        return "172.67.243.247:443";
+        return "143.110.222.153:3128";
 else
         return EasyListFindProxyForURL(url, host);
 }
