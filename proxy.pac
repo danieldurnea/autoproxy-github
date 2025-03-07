@@ -1,9 +1,13 @@
 // -*- mode: javascript; js-indent-level: 2 -*-
 // vim: set filetype=javascript tabstop=2 shiftwidth=2 expandtab:
 
-const direct = "direct";
-const blocked = "blocked";
-const proxy = "proxy";
+// Influenced in part by code from King of the PAC from http://securemecca.com/pac.html
+var proxy = "127.0.0.1:3128;";
+// Define the blackhole proxy for blocked adware and trackware
+var DIRECT = "127.0.0.1:3128";
+var normal = "DIRECT";
+var blackhole = "127.0.0.1:53";  
+var blackhole_ip_port = "127.0.0.1:53"; 
 
 const DIRECT = "DIRECT";
 var proxyBehaviors = {
@@ -12405,4 +12409,8 @@ if (typeof process !== 'undefined' && process.argv.includes('test')) {
   }
 
   runTests();
+}
+        return "DIRECT";
+else
+        return EasyListFindProxyForURL(url, host);
 }
