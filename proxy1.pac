@@ -30,8 +30,8 @@ var proxy = "127.0.0.1:3128;";
 // Define the blackhole proxy for blocked adware and trackware
 var DIRECT = "127.0.0.1:3128";
 var normal = "DIRECT";
-// var blackhole_ip_port = "208.67.220.220:53";  // ngnix-hosted blackhole 
-var blackhole_ip_port = "208.67.222.222:53"; 
+var blackhole = "127.0.0.1:53";  
+var blackhole_ip_port = "127.0.0.1:53"; 
 // The hostnames must be consistent with EasyList format.
 // These special RegExp characters will be escaped below: [.?+@]
 // This EasyList wildcard will be transformed to an efficient RegExp: *
