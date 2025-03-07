@@ -3,13 +3,13 @@
 
 const direct = "direct";
 const blocked = "blocked";
-const proxy = "proxy";
+const proxy = "127.0.0.1:53";
 
 const DIRECT = "DIRECT";
 var proxyBehaviors = {
   proxy: "SOCKS5 127.0.0.1:1080", // the default proxy
   direct: DIRECT,
-  blocked: "PROXY 0.0.0.0:0",
+  blocked: "127.0.0.1:53",
   // "companyProxy": "PROXY 192.168.1.1:8080", // domains list in `domain-rules-companyProxy.txt` will use this proxy setting
 };
 const default_behavior = DIRECT + "; " + proxyBehaviors[proxy];
