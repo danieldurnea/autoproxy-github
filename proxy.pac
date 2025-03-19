@@ -1,7 +1,7 @@
 // -*- mode: javascript; js-indent-level: 2 -*-
 // vim: set filetype=javascript tabstop=2 shiftwidth=2 expandtab:
 var proxyBehaviors = {
-  proxy: "SOCKS 127.0.0.1:9080", // 默认代理
+  proxy: "SOCKS 127.0.0.1:9050", // 默认代理
   direct: DIRECT,
   blocked: "PROXY 0.0.0.0:0",
   "http_proxy": "PROXY 127.0.0.1:9080",
