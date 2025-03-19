@@ -1,20 +1,16 @@
 // -*- mode: javascript; js-indent-level: 2 -*-
 // vim: set filetype=javascript tabstop=2 shiftwidth=2 expandtab:
 
-// Influenced in part by code from King of the PAC from http://securemecca.com/pac.html
-var proxy = "127.0.0.1:3128;";
-// Define the blackhole proxy for blocked adware and trackware
-var DIRECT = "127.0.0.1:3128";
-var normal = "DIRECT";
-var blackhole = "127.0.0.1:53";  
-var blackhole_ip_port = "127.0.0.1:53"; 
+const direct = "direct";
+const blocked = "blocked";
+const proxy = "proxy";
 
-const DIRECT = "127.0.0.1:3128";
+const DIRECT = "DIRECT";
 var proxyBehaviors = {
-  proxy: "127.0.0:3128", // the default proxy
+  proxy: "SOCKS5 127.0.0.1:1080", // the default proxy
   direct: DIRECT,
-  blocked: "127.0.0.1:53",
-  // "companyProxy": "DIRECT", // domains list in `domain-rules-companyProxy.txt` will use this proxy setting
+  blocked: "PROXY 0.0.0.0:0",
+  // "companyProxy": "PROXY 192.168.1.1:8080", // domains list in `domain-rules-companyProxy.txt` will use this proxy setting
 };
 const default_behavior = DIRECT + "; " + proxyBehaviors[proxy];
 
@@ -98,15 +94,16 @@ const ipv4NetworkRules = [
   [0x050a8f00, 24, direct], // 5.10.143.0/24
   [0x059a8400, 23, direct], // 5.154.132.0/23
   [0x059a8800, 22, direct], // 5.154.136.0/22
-  [0x059a8c00, 23, direct], // 5.154.140.0/23
   [0x05afed00, 24, direct], // 5.175.237.0/24
   [0x05afef00, 24, direct], // 5.175.239.0/24
-  [0x05e76000, 24, direct], // 5.231.96.0/24
   [0x08195200, 24, direct], // 8.25.82.0/24
   [0x08267900, 24, direct], // 8.38.121.0/24
   [0x082d3400, 24, direct], // 8.45.52.0/24
   [0x082db000, 24, direct], // 8.45.176.0/24
   [0x08305500, 24, direct], // 8.48.85.0/24
+  [0x08802000, 19, direct], // 8.128.32.0/19
+  [0x08804000, 19, direct], // 8.128.64.0/19
+  [0x08806000, 21, direct], // 8.128.96.0/21
   [0x08810000, 16, direct], // 8.129.0.0/16
   [0x08820000, 15, direct], // 8.130.0.0/15
   [0x08840000, 14, direct], // 8.132.0.0/14
@@ -118,7 +115,8 @@ const ipv4NetworkRules = [
   [0x08944000, 18, direct], // 8.148.64.0/18
   [0x08948000, 17, direct], // 8.148.128.0/17
   [0x08950000, 16, direct], // 8.149.0.0/16
-  [0x08960000, 21, direct], // 8.150.0.0/21
+  [0x08960000, 20, direct], // 8.150.0.0/20
+  [0x08964000, 23, direct], // 8.150.64.0/23
   [0x08980000, 13, direct], // 8.152.0.0/13
   [0x08a00000, 15, direct], // 8.160.0.0/15
   [0x0e100000, 12, direct], // 14.16.0.0/12
@@ -284,7 +282,6 @@ const ipv4NetworkRules = [
   [0x2be15400, 23, direct], // 43.225.84.0/23
   [0x2be15700, 24, direct], // 43.225.87.0/24
   [0x2be17800, 22, direct], // 43.225.120.0/22
-  [0x2be1b600, 23, direct], // 43.225.182.0/23
   [0x2be1d000, 22, direct], // 43.225.208.0/22
   [0x2be1d800, 22, direct], // 43.225.216.0/22
   [0x2be1ff00, 24, direct], // 43.225.255.0/24
@@ -301,7 +298,7 @@ const ipv4NetworkRules = [
   [0x2be38c00, 22, direct], // 43.227.140.0/22
   [0x2be39c00, 22, direct], // 43.227.156.0/22
   [0x2be3a000, 20, direct], // 43.227.160.0/20
-  [0x2be3b500, 24, direct], // 43.227.181.0/24
+  [0x2be3b400, 24, direct], // 43.227.180.0/24
   [0x2be3c000, 19, direct], // 43.227.192.0/19
   [0x2be3fc00, 22, direct], // 43.227.252.0/22
   [0x2be40800, 21, direct], // 43.228.8.0/21
@@ -309,8 +306,6 @@ const ipv4NetworkRules = [
   [0x2be42400, 22, direct], // 43.228.36.0/22
   [0x2be42800, 21, direct], // 43.228.40.0/21
   [0x2be43000, 20, direct], // 43.228.48.0/20
-  [0x2be44200, 23, direct], // 43.228.66.0/23
-  [0x2be44400, 24, direct], // 43.228.68.0/24
   [0x2be44c00, 22, direct], // 43.228.76.0/22
   [0x2be4b400, 24, direct], // 43.228.180.0/24
   [0x2be53000, 22, direct], // 43.229.48.0/22
@@ -487,6 +482,7 @@ const ipv4NetworkRules = [
   [0x2d972f00, 24, direct], // 45.151.47.0/24
   [0x2d9d5800, 24, direct], // 45.157.88.0/24
   [0x2dc30600, 24, direct], // 45.195.6.0/24
+  [0x2dc80a00, 24, direct], // 45.200.10.0/24
   [0x2dcad100, 24, direct], // 45.202.209.0/24
   [0x2dcad200, 23, direct], // 45.202.210.0/23
   [0x2dcad400, 24, direct], // 45.202.212.0/24
@@ -557,7 +553,8 @@ const ipv4NetworkRules = [
   [0x2ff63200, 24, direct], // 47.246.50.0/24
   [0x2ff63900, 24, direct], // 47.246.57.0/24
   [0x2ff63a00, 24, direct], // 47.246.58.0/24
-  [0x2ff63c00, 22, direct], // 47.246.60.0/22
+  [0x2ff63c00, 23, direct], // 47.246.60.0/23
+  [0x2ff63f00, 24, direct], // 47.246.63.0/24
   [0x31040000, 18, direct], // 49.4.0.0/18
   [0x31044000, 19, direct], // 49.4.64.0/19
   [0x31046000, 21, direct], // 49.4.96.0/21
@@ -803,6 +800,7 @@ const ipv4NetworkRules = [
   [0x51ad1400, 22, direct], // 81.173.20.0/22
   [0x51ad1c00, 24, direct], // 81.173.28.0/24
   [0x529c0000, 15, direct], // 82.156.0.0/15
+  [0x54360200, 23, direct], // 84.54.2.0/23
   [0x55edcd00, 24, direct], // 85.237.205.0/24
   [0x59902600, 24, direct], // 89.144.38.0/24
   [0x5ebf0000, 17, direct], // 94.191.0.0/17
@@ -823,7 +821,6 @@ const ipv4NetworkRules = [
   [0x65323800, 22, direct], // 101.50.56.0/22
   [0x65340400, 24, direct], // 101.52.4.0/24
   [0x65340600, 24, direct], // 101.52.6.0/24
-  [0x65343400, 24, direct], // 101.52.52.0/24
   [0x65347000, 21, direct], // 101.52.112.0/21
   [0x65347c00, 22, direct], // 101.52.124.0/22
   [0x65348000, 20, direct], // 101.52.128.0/20
@@ -1321,7 +1318,6 @@ const ipv4NetworkRules = [
   [0x6796a400, 23, direct], // 103.150.164.0/23
   [0x6796b500, 24, direct], // 103.150.181.0/24
   [0x6796d400, 24, direct], // 103.150.212.0/24
-  [0x67970500, 24, direct], // 103.151.5.0/24
   [0x67979400, 23, direct], // 103.151.148.0/23
   [0x6797b200, 23, direct], // 103.151.178.0/23
   [0x6797d800, 23, direct], // 103.151.216.0/23
@@ -1340,6 +1336,7 @@ const ipv4NetworkRules = [
   [0x679aa200, 23, direct], // 103.154.162.0/23
   [0x679b4c00, 23, direct], // 103.155.76.0/23
   [0x679b6e00, 23, direct], // 103.155.110.0/23
+  [0x679c3700, 24, direct], // 103.156.55.0/24
   [0x679c4400, 23, direct], // 103.156.68.0/23
   [0x679cae00, 23, direct], // 103.156.174.0/23
   [0x679cba00, 23, direct], // 103.156.186.0/23
@@ -1829,12 +1826,15 @@ const ipv4NetworkRules = [
   [0x712d7000, 22, direct], // 113.45.112.0/22
   [0x712d7800, 22, direct], // 113.45.120.0/22
   [0x712d8000, 17, direct], // 113.45.128.0/17
+  [0x712e0000, 17, direct], // 113.46.0.0/17
   [0x712e8000, 18, direct], // 113.46.128.0/18
   [0x712ec000, 19, direct], // 113.46.192.0/19
   [0x712ee000, 20, direct], // 113.46.224.0/20
   [0x712ef000, 21, direct], // 113.46.240.0/21
   [0x712f0000, 18, direct], // 113.47.0.0/18
   [0x712f4000, 19, direct], // 113.47.64.0/19
+  [0x712f6000, 21, direct], // 113.47.96.0/21
+  [0x712f6800, 22, direct], // 113.47.104.0/22
   [0x712f7000, 20, direct], // 113.47.112.0/20
   [0x712f8000, 18, direct], // 113.47.128.0/18
   [0x712fcc00, 22, direct], // 113.47.204.0/22
@@ -1987,6 +1987,7 @@ const ipv4NetworkRules = [
   [0x73ae4000, 19, direct], // 115.174.64.0/19
   [0x73af0000, 18, direct], // 115.175.0.0/18
   [0x73af4000, 19, direct], // 115.175.64.0/19
+  [0x73af7800, 21, direct], // 115.175.120.0/21
   [0x73b60000, 15, direct], // 115.182.0.0/15
   [0x73be0000, 17, direct], // 115.190.0.0/17
   [0x73be8000, 19, direct], // 115.190.128.0/19
@@ -2125,9 +2126,9 @@ const ipv4NetworkRules = [
   [0x75480000, 23, direct], // 117.72.0.0/23
   [0x75480800, 21, direct], // 117.72.8.0/21
   [0x75481000, 23, direct], // 117.72.16.0/23
-  [0x75482000, 20, direct], // 117.72.32.0/20
-  [0x75483000, 21, direct], // 117.72.48.0/21
+  [0x75482000, 19, direct], // 117.72.32.0/19
   [0x75484000, 18, direct], // 117.72.64.0/18
+  [0x7548c000, 19, direct], // 117.72.192.0/19
   [0x7548f800, 22, direct], // 117.72.248.0/22
   [0x7548ff00, 24, direct], // 117.72.255.0/24
   [0x75490000, 20, direct], // 117.73.0.0/20
@@ -2304,6 +2305,7 @@ const ipv4NetworkRules = [
   [0x77170000, 16, direct], // 119.23.0.0/16
   [0x771b4000, 18, direct], // 119.27.64.0/18
   [0x771ba000, 19, direct], // 119.27.160.0/19
+  [0x771c1c00, 24, direct], // 119.28.28.0/24
   [0x771d0000, 16, direct], // 119.29.0.0/16
   [0x771fc000, 19, direct], // 119.31.192.0/19
   [0x77200000, 15, direct], // 119.32.0.0/15
@@ -2610,7 +2612,8 @@ const ipv4NetworkRules = [
   [0x7b31c000, 23, direct], // 123.49.192.0/23
   [0x7b31c300, 24, direct], // 123.49.195.0/24
   [0x7b31c400, 24, direct], // 123.49.196.0/24
-  [0x7b31f000, 22, direct], // 123.49.240.0/22
+  [0x7b31f000, 24, direct], // 123.49.240.0/24
+  [0x7b31f200, 23, direct], // 123.49.242.0/23
   [0x7b340000, 14, direct], // 123.52.0.0/14
   [0x7b380000, 15, direct], // 123.56.0.0/15
   [0x7b3a0000, 19, direct], // 123.58.0.0/19
@@ -2727,7 +2730,8 @@ const ipv4NetworkRules = [
   [0x7cc40a00, 23, direct], // 124.196.10.0/23
   [0x7cc40c00, 23, direct], // 124.196.12.0/23
   [0x7cc40e00, 24, direct], // 124.196.14.0/24
-  [0x7cc41000, 22, direct], // 124.196.16.0/22
+  [0x7cc41100, 24, direct], // 124.196.17.0/24
+  [0x7cc41200, 23, direct], // 124.196.18.0/23
   [0x7cc41400, 24, direct], // 124.196.20.0/24
   [0x7cc41600, 24, direct], // 124.196.22.0/24
   [0x7cc41800, 22, direct], // 124.196.24.0/22
@@ -2942,12 +2946,11 @@ const ipv4NetworkRules = [
   [0x9b661b00, 24, direct], // 155.102.27.0/24
   [0x9b661c00, 23, direct], // 155.102.28.0/23
   [0x9b661e00, 24, direct], // 155.102.30.0/24
-  [0x9b662000, 20, direct], // 155.102.32.0/20
-  [0x9b663100, 24, direct], // 155.102.49.0/24
-  [0x9b663200, 23, direct], // 155.102.50.0/23
-  [0x9b663400, 22, direct], // 155.102.52.0/22
-  [0x9b663800, 22, direct], // 155.102.56.0/22
-  [0x9b663c00, 23, direct], // 155.102.60.0/23
+  [0x9b662000, 19, direct], // 155.102.32.0/19
+  [0x9b668300, 24, direct], // 155.102.131.0/24
+  [0x9b668400, 23, direct], // 155.102.132.0/23
+  [0x9b668800, 23, direct], // 155.102.136.0/23
+  [0x9b668c00, 24, direct], // 155.102.140.0/24
   [0x9b7eb000, 23, direct], // 155.126.176.0/23
   [0x9c3b6c00, 24, direct], // 156.59.108.0/24
   [0x9c3bca00, 23, direct], // 156.59.202.0/23
@@ -3029,7 +3032,8 @@ const ipv4NetworkRules = [
   [0xa3b52000, 21, direct], // 163.181.32.0/21
   [0xa3b52800, 24, direct], // 163.181.40.0/24
   [0xa3b52a00, 23, direct], // 163.181.42.0/23
-  [0xa3b52c00, 24, direct], // 163.181.44.0/24
+  [0xa3b52c00, 23, direct], // 163.181.44.0/23
+  [0xa3b52e00, 24, direct], // 163.181.46.0/24
   [0xa3b53100, 24, direct], // 163.181.49.0/24
   [0xa3b53200, 24, direct], // 163.181.50.0/24
   [0xa3b53400, 24, direct], // 163.181.52.0/24
@@ -3082,10 +3086,7 @@ const ipv4NetworkRules = [
   [0xa3b5c900, 24, direct], // 163.181.201.0/24
   [0xa3b5ca00, 23, direct], // 163.181.202.0/23
   [0xa3b5cc00, 22, direct], // 163.181.204.0/22
-  [0xa3b5d100, 24, direct], // 163.181.209.0/24
-  [0xa3b5d200, 23, direct], // 163.181.210.0/23
-  [0xa3b5d400, 22, direct], // 163.181.212.0/22
-  [0xa3b5d800, 21, direct], // 163.181.216.0/21
+  [0xa3b5d000, 20, direct], // 163.181.208.0/20
   [0xa3b5e000, 23, direct], // 163.181.224.0/23
   [0xa3b5e400, 22, direct], // 163.181.228.0/22
   [0xa3b5e800, 24, direct], // 163.181.232.0/24
@@ -3274,7 +3275,6 @@ const ipv4NetworkRules = [
   [0xc08cd000, 21, direct], // 192.140.208.0/21
   [0xc0908000, 17, direct], // 192.144.128.0/17
   [0xc0a30b00, 24, direct], // 192.163.11.0/24
-  [0xc0d00200, 24, direct], // 192.208.2.0/24
   [0xc0e86100, 24, direct], // 192.232.97.0/24
   [0xc1700000, 16, direct], // 193.112.0.0/16
   [0xc1770a00, 24, direct], // 193.119.10.0/24
@@ -3297,6 +3297,7 @@ const ipv4NetworkRules = [
   [0xc6d07000, 23, direct], // 198.208.112.0/23
   [0xc7b6ef00, 24, direct], // 199.182.239.0/24
   [0xc7f49000, 24, direct], // 199.244.144.0/24
+  [0xc994b800, 22, direct], // 201.148.184.0/22
   [0xca048000, 19, direct], // 202.4.128.0/19
   [0xca04fc00, 22, direct], // 202.4.252.0/22
   [0xca0eeb00, 24, direct], // 202.14.235.0/24
@@ -3327,6 +3328,7 @@ const ipv4NetworkRules = [
   [0xca2e2e00, 24, direct], // 202.46.46.0/24
   [0xca2ee000, 22, direct], // 202.46.224.0/22
   [0xca2ee400, 23, direct], // 202.46.228.0/23
+  [0xca2ee800, 22, direct], // 202.46.232.0/22
   [0xca2f6800, 21, direct], // 202.47.104.0/21
   [0xca370000, 19, direct], // 202.55.0.0/19
   [0xca39c000, 24, direct], // 202.57.192.0/24
@@ -3638,6 +3640,7 @@ const ipv4NetworkRules = [
   [0xcb6b6c00, 23, direct], // 203.107.108.0/23
   [0xcb6ea000, 19, direct], // 203.110.160.0/19
   [0xcb6ed000, 20, direct], // 203.110.208.0/20
+  [0xcb6ee800, 23, direct], // 203.110.232.0/23
   [0xcb6eea00, 24, direct], // 203.110.234.0/24
   [0xcb72f400, 22, direct], // 203.114.244.0/22
   [0xcb76f800, 22, direct], // 203.118.248.0/22
@@ -4644,6 +4647,7 @@ const ipv6NetworkRules = [
   [0x2404228001300000n, 0x0000000000000000n, 48, direct], // 2404:2280:130::/48
   [0x2404228001340000n, 0x0000000000000000n, 48, direct], // 2404:2280:134::/48
   [0x2404228001360000n, 0x0000000000000000n, 47, direct], // 2404:2280:136::/47
+  [0x2404228001380000n, 0x0000000000000000n, 48, direct], // 2404:2280:138::/48
   [0x24042280013b0000n, 0x0000000000000000n, 48, direct], // 2404:2280:13b::/48
   [0x24042280013c0000n, 0x0000000000000000n, 47, direct], // 2404:2280:13c::/47
   [0x2404228001420000n, 0x0000000000000000n, 48, direct], // 2404:2280:142::/48
@@ -4689,7 +4693,7 @@ const ipv6NetworkRules = [
   [0x2404228001d80000n, 0x0000000000000000n, 45, direct], // 2404:2280:1d8::/45
   [0x2404228001e00000n, 0x0000000000000000n, 45, direct], // 2404:2280:1e0::/45
   [0x2404228001e80000n, 0x0000000000000000n, 46, direct], // 2404:2280:1e8::/46
-  [0x2404228001ec0000n, 0x0000000000000000n, 48, direct], // 2404:2280:1ec::/48
+  [0x2404228001ec0000n, 0x0000000000000000n, 47, direct], // 2404:2280:1ec::/47
   [0x2404228001ee0000n, 0x0000000000000000n, 48, direct], // 2404:2280:1ee::/48
   [0x2404228001f00000n, 0x0000000000000000n, 45, direct], // 2404:2280:1f0::/45
   [0x2404228001f80000n, 0x0000000000000000n, 46, direct], // 2404:2280:1f8::/46
@@ -4770,22 +4774,19 @@ const ipv6NetworkRules = [
   [0x2406084096000000n, 0x0000000000000000n, 43, direct], // 2406:840:9600::/43
   [0x2406084096200000n, 0x0000000000000000n, 44, direct], // 2406:840:9620::/44
   [0x2406084099610000n, 0x0000000000000000n, 48, direct], // 2406:840:9961::/48
-  [0x2406084099620000n, 0x0000000000000000n, 48, direct], // 2406:840:9962::/48
+  [0x2406084099620000n, 0x0000000000000000n, 47, direct], // 2406:840:9962::/47
   [0x24060840996c0000n, 0x0000000000000000n, 48, direct], // 2406:840:996c::/48
   [0x24060840e0310000n, 0x0000000000000000n, 48, direct], // 2406:840:e031::/48
   [0x24060840e0330000n, 0x0000000000000000n, 48, direct], // 2406:840:e033::/48
   [0x24060840e03f0000n, 0x0000000000000000n, 48, direct], // 2406:840:e03f::/48
   [0x24060840e0800000n, 0x0000000000000000n, 44, direct], // 2406:840:e080::/44
   [0x24060840e0cf0000n, 0x0000000000000000n, 48, direct], // 2406:840:e0cf::/48
-  [0x24060840e0e10000n, 0x0000000000000000n, 48, direct], // 2406:840:e0e1::/48
   [0x24060840e0e20000n, 0x0000000000000000n, 48, direct], // 2406:840:e0e2::/48
   [0x24060840e0e50000n, 0x0000000000000000n, 48, direct], // 2406:840:e0e5::/48
   [0x24060840e0e80000n, 0x0000000000000000n, 48, direct], // 2406:840:e0e8::/48
   [0x24060840e10f0000n, 0x0000000000000000n, 48, direct], // 2406:840:e10f::/48
   [0x24060840e14f0000n, 0x0000000000000000n, 48, direct], // 2406:840:e14f::/48
-  [0x24060840e2000000n, 0x0000000000000000n, 44, direct], // 2406:840:e200::/44
   [0x24060840e2300000n, 0x0000000000000000n, 44, direct], // 2406:840:e230::/44
-  [0x24060840e2cb0000n, 0x0000000000000000n, 48, direct], // 2406:840:e2cb::/48
   [0x24060840e5000000n, 0x0000000000000000n, 47, direct], // 2406:840:e500::/47
   [0x24060840e6000000n, 0x0000000000000000n, 47, direct], // 2406:840:e600::/47
   [0x24060840e6080000n, 0x0000000000000000n, 46, direct], // 2406:840:e608::/46
@@ -4815,9 +4816,7 @@ const ipv6NetworkRules = [
   [0x24060840f4400000n, 0x0000000000000000n, 47, direct], // 2406:840:f440::/47
   [0x24060840f44f0000n, 0x0000000000000000n, 48, direct], // 2406:840:f44f::/48
   [0x24060840fa010000n, 0x0000000000000000n, 48, direct], // 2406:840:fa01::/48
-  [0x24060840fa400000n, 0x0000000000000000n, 48, direct], // 2406:840:fa40::/48
-  [0x24060840fa600000n, 0x0000000000000000n, 46, direct], // 2406:840:fa60::/46
-  [0x24060840fa6a0000n, 0x0000000000000000n, 47, direct], // 2406:840:fa6a::/47
+  [0x24060840fa600000n, 0x0000000000000000n, 44, direct], // 2406:840:fa60::/44
   [0x24060840fb000000n, 0x0000000000000000n, 40, direct], // 2406:840:fb00::/40
   [0x24060840fc100000n, 0x0000000000000000n, 44, direct], // 2406:840:fc10::/44
   [0x24060840fc200000n, 0x0000000000000000n, 43, direct], // 2406:840:fc20::/43
@@ -4838,9 +4837,7 @@ const ipv6NetworkRules = [
   [0x24060840fe9e0000n, 0x0000000000000000n, 48, direct], // 2406:840:fe9e::/48
   [0x24060840fea20000n, 0x0000000000000000n, 47, direct], // 2406:840:fea2::/47
   [0x24060840fea40000n, 0x0000000000000000n, 46, direct], // 2406:840:fea4::/46
-  [0x24060840fea80000n, 0x0000000000000000n, 48, direct], // 2406:840:fea8::/48
-  [0x24060840feaa0000n, 0x0000000000000000n, 47, direct], // 2406:840:feaa::/47
-  [0x24060840feac0000n, 0x0000000000000000n, 46, direct], // 2406:840:feac::/46
+  [0x24060840fea80000n, 0x0000000000000000n, 45, direct], // 2406:840:fea8::/45
   [0x24060840fec00000n, 0x0000000000000000n, 48, direct], // 2406:840:fec0::/48
   [0x24060840fec20000n, 0x0000000000000000n, 47, direct], // 2406:840:fec2::/47
   [0x24060840fec40000n, 0x0000000000000000n, 47, direct], // 2406:840:fec4::/47
@@ -5310,7 +5307,6 @@ const ipv6NetworkRules = [
   [0x2408864c00000000n, 0x0000000000000000n, 32, direct], // 2408:864c::/32
   [0x2408864e00000000n, 0x0000000000000000n, 31, direct], // 2408:864e::/31
   [0x2408865000000000n, 0x0000000000000000n, 30, direct], // 2408:8650::/30
-  [0x2408865400000000n, 0x0000000000000000n, 32, direct], // 2408:8654::/32
   [0x2408865600000000n, 0x0000000000000000n, 31, direct], // 2408:8656::/31
   [0x2408865800000000n, 0x0000000000000000n, 30, direct], // 2408:8658::/30
   [0x2408865c00000000n, 0x0000000000000000n, 31, direct], // 2408:865c::/31
@@ -5427,6 +5423,7 @@ const ipv6NetworkRules = [
   [0x24088a26c0000000n, 0x0000000000000000n, 34, direct], // 2408:8a26:c000::/34
   [0x24088a2740000000n, 0x0000000000000000n, 35, direct], // 2408:8a27:4000::/35
   [0x2409200000000000n, 0x0000000000000000n, 31, direct], // 2409:2000::/31
+  [0x2409200200000000n, 0x0000000000000000n, 32, direct], // 2409:2002::/32
   [0x240927fa00000000n, 0x0000000000000000n, 48, direct], // 2409:27fa::/48
   [0x240927faf0000000n, 0x0000000000000000n, 48, direct], // 2409:27fa:f000::/48
   [0x240927fb00000000n, 0x0000000000000000n, 48, direct], // 2409:27fb::/48
@@ -5435,6 +5432,7 @@ const ipv6NetworkRules = [
   [0x2409610000000000n, 0x0000000000000000n, 44, direct], // 2409:6100::/44
   [0x2409800000000000n, 0x0000000000000000n, 20, direct], // 2409:8000::/20
   [0x240a200000000000n, 0x0000000000000000n, 29, direct], // 240a:2000::/29
+  [0x240a40021b000000n, 0x0000000000000000n, 40, direct], // 240a:4002:1b00::/40
   [0x240a401080000000n, 0x0000000000000000n, 33, direct], // 240a:4010:8000::/33
   [0x240a4020083a0000n, 0x0000000000000000n, 48, direct], // 240a:4020:83a::/48
   [0x240a4020883a0000n, 0x0000000000000000n, 48, direct], // 240a:4020:883a::/48
@@ -5540,13 +5538,11 @@ const ipv6NetworkRules = [
   [0x240cc00000000000n, 0x0000000000000000n, 20, direct], // 240c:c000::/20
   [0x240d400000000000n, 0x0000000000000000n, 21, direct], // 240d:4000::/21
   [0x240e000000000000n, 0x0000000000000000n, 20, direct], // 240e::/20
-  [0x26011d0840000000n, 0x0000000000000000n, 44, direct], // 2601:1d08:4000::/44
   [0x260202e000ff0000n, 0x0000000000000000n, 48, direct], // 2602:2e0:ff::/48
   [0x2602f7ee00ee0000n, 0x0000000000000000n, 48, direct], // 2602:f7ee:ee::/48
   [0x2602f9ba00a80000n, 0x0000000000000000n, 48, direct], // 2602:f9ba:a8::/48
   [0x2602f9ba010c0000n, 0x0000000000000000n, 48, direct], // 2602:f9ba:10c::/48
   [0x2602fa4f06000000n, 0x0000000000000000n, 40, direct], // 2602:fa4f:600::/40
-  [0x2602fab000110000n, 0x0000000000000000n, 48, direct], // 2602:fab0:11::/48
   [0x2602fd9208010000n, 0x0000000000000000n, 48, direct], // 2602:fd92:801::/48
   [0x2602fd920cc00000n, 0x0000000000000000n, 44, direct], // 2602:fd92:cc0::/44
   [0x2602fed2731d0000n, 0x0000000000000000n, 48, direct], // 2602:fed2:731d::/48
@@ -5570,9 +5566,8 @@ const ipv6NetworkRules = [
   [0x26059d8090420000n, 0x0000000000000000n, 48, direct], // 2605:9d80:9042::/48
   [0x26059d8090710000n, 0x0000000000000000n, 48, direct], // 2605:9d80:9071::/48
   [0x26059d8090920000n, 0x0000000000000000n, 48, direct], // 2605:9d80:9092::/48
-  [0x2620005740040000n, 0x0000000000000000n, 47, direct], // 2620:57:4004::/47
+  [0x2620005740040000n, 0x0000000000000000n, 48, direct], // 2620:57:4004::/48
   [0x28041e4800000000n, 0x0000000000000000n, 32, direct], // 2804:1e48::/32
-  [0x2a01ffc701000000n, 0x0000000000000000n, 40, direct], // 2a01:ffc7:100::/40
   [0x2a035840011b0000n, 0x0000000000000000n, 48, direct], // 2a03:5840:11b::/48
   [0x2a043e0010020000n, 0x0000000000000000n, 48, direct], // 2a04:3e00:1002::/48
   [0x2a04f58080100000n, 0x0000000000000000n, 47, direct], // 2a04:f580:8010::/47
@@ -5602,10 +5597,6 @@ const ipv6NetworkRules = [
   [0x2a05108700000000n, 0x0000000000000000n, 32, direct], // 2a05:1087::/32
   [0x2a05b90000000000n, 0x0000000000000000n, 29, direct], // 2a05:b900::/29
   [0x2a06128180000000n, 0x0000000000000000n, 36, direct], // 2a06:1281:8000::/36
-  [0x2a061281b1000000n, 0x0000000000000000n, 40, direct], // 2a06:1281:b100::/40
-  [0x2a061281b2000000n, 0x0000000000000000n, 39, direct], // 2a06:1281:b200::/39
-  [0x2a061281b4000000n, 0x0000000000000000n, 38, direct], // 2a06:1281:b400::/38
-  [0x2a061281b8000000n, 0x0000000000000000n, 39, direct], // 2a06:1281:b800::/39
   [0x2a06360100000000n, 0x0000000000000000n, 32, direct], // 2a06:3601::/32
   [0x2a06360300000000n, 0x0000000000000000n, 32, direct], // 2a06:3603::/32
   [0x2a06360700000000n, 0x0000000000000000n, 32, direct], // 2a06:3607::/32
@@ -5640,7 +5631,8 @@ const ipv6NetworkRules = [
   [0x2a0a284000200000n, 0x0000000000000000n, 43, direct], // 2a0a:2840:20::/43
   [0x2a0a2845aab80000n, 0x0000000000000000n, 46, direct], // 2a0a:2845:aab8::/46
   [0x2a0a6040ec000000n, 0x0000000000000000n, 40, direct], // 2a0a:6040:ec00::/40
-  [0x2a0a604466000000n, 0x0000000000000000n, 40, direct], // 2a0a:6044:6600::/40
+  [0x2a0a604467000000n, 0x0000000000000000n, 40, direct], // 2a0a:6044:6700::/40
+  [0x2a0a60447a000000n, 0x0000000000000000n, 40, direct], // 2a0a:6044:7a00::/40
   [0x2a0b0b87ffb50000n, 0x0000000000000000n, 48, direct], // 2a0b:b87:ffb5::/48
   [0x2a0b254200000000n, 0x0000000000000000n, 48, direct], // 2a0b:2542::/48
   [0x2a0b434005600000n, 0x0000000000000000n, 44, direct], // 2a0b:4340:560::/44
@@ -5658,11 +5650,12 @@ const ipv6NetworkRules = [
   [0x2a0eaa0600000000n, 0x0000000000000000n, 40, direct], // 2a0e:aa06::/40
   [0x2a0eaa0604400000n, 0x0000000000000000n, 48, direct], // 2a0e:aa06:440::/48
   [0x2a0eaa0604900000n, 0x0000000000000000n, 44, direct], // 2a0e:aa06:490::/44
+  [0x2a0eaa0604e00000n, 0x0000000000000000n, 44, direct], // 2a0e:aa06:4e0::/44
   [0x2a0eaa0605000000n, 0x0000000000000000n, 44, direct], // 2a0e:aa06:500::/44
   [0x2a0eaa0605200000n, 0x0000000000000000n, 48, direct], // 2a0e:aa06:520::/48
   [0x2a0eaa0605410000n, 0x0000000000000000n, 48, direct], // 2a0e:aa06:541::/48
   [0x2a0eaa07e01b0000n, 0x0000000000000000n, 48, direct], // 2a0e:aa07:e01b::/48
-  [0x2a0eaa07e0240000n, 0x0000000000000000n, 47, direct], // 2a0e:aa07:e024::/47
+  [0x2a0eaa07e0250000n, 0x0000000000000000n, 48, direct], // 2a0e:aa07:e025::/48
   [0x2a0eaa07e0300000n, 0x0000000000000000n, 48, direct], // 2a0e:aa07:e030::/48
   [0x2a0eaa07e0350000n, 0x0000000000000000n, 48, direct], // 2a0e:aa07:e035::/48
   [0x2a0eaa07e0390000n, 0x0000000000000000n, 48, direct], // 2a0e:aa07:e039::/48
@@ -5676,7 +5669,6 @@ const ipv6NetworkRules = [
   [0x2a0eaa07e2000000n, 0x0000000000000000n, 43, direct], // 2a0e:aa07:e200::/43
   [0x2a0eaa07e2200000n, 0x0000000000000000n, 44, direct], // 2a0e:aa07:e220::/44
   [0x2a0eaa07ec100000n, 0x0000000000000000n, 44, direct], // 2a0e:aa07:ec10::/44
-  [0x2a0eaa07f0d10000n, 0x0000000000000000n, 48, direct], // 2a0e:aa07:f0d1::/48
   [0x2a0eaa07f0d20000n, 0x0000000000000000n, 48, direct], // 2a0e:aa07:f0d2::/48
   [0x2a0eaa07f0d50000n, 0x0000000000000000n, 48, direct], // 2a0e:aa07:f0d5::/48
   [0x2a0eaa07f0d80000n, 0x0000000000000000n, 48, direct], // 2a0e:aa07:f0d8::/48
@@ -5708,12 +5700,11 @@ const ipv6NetworkRules = [
   [0x2a0f7803fa220000n, 0x0000000000000000n, 47, direct], // 2a0f:7803:fa22::/47
   [0x2a0f7803fa240000n, 0x0000000000000000n, 46, direct], // 2a0f:7803:fa24::/46
   [0x2a0f7803faf30000n, 0x0000000000000000n, 48, direct], // 2a0f:7803:faf3::/48
-  [0x2a0f7803faf70000n, 0x0000000000000000n, 48, direct], // 2a0f:7803:faf7::/48
   [0x2a0f7803fe410000n, 0x0000000000000000n, 48, direct], // 2a0f:7803:fe41::/48
   [0x2a0f7803fe420000n, 0x0000000000000000n, 47, direct], // 2a0f:7803:fe42::/47
   [0x2a0f7803fe440000n, 0x0000000000000000n, 46, direct], // 2a0f:7803:fe44::/46
   [0x2a0f7803fe4a0000n, 0x0000000000000000n, 48, direct], // 2a0f:7803:fe4a::/48
-  [0x2a0f7803fe4c0000n, 0x0000000000000000n, 47, direct], // 2a0f:7803:fe4c::/47
+  [0x2a0f7803fe4c0000n, 0x0000000000000000n, 48, direct], // 2a0f:7803:fe4c::/48
   [0x2a0f7803fe810000n, 0x0000000000000000n, 48, direct], // 2a0f:7803:fe81::/48
   [0x2a0f7803fe820000n, 0x0000000000000000n, 48, direct], // 2a0f:7803:fe82::/48
   [0x2a0f7804da000000n, 0x0000000000000000n, 40, direct], // 2a0f:7804:da00::/40
@@ -5723,8 +5714,9 @@ const ipv6NetworkRules = [
   [0x2a0f7d0700000000n, 0x0000000000000000n, 32, direct], // 2a0f:7d07::/32
   [0x2a0f85c108160000n, 0x0000000000000000n, 48, direct], // 2a0f:85c1:816::/48
   [0x2a0f85c10b3a0000n, 0x0000000000000000n, 48, direct], // 2a0f:85c1:b3a::/48
-  [0x2a0f85c10b4a0000n, 0x0000000000000000n, 48, direct], // 2a0f:85c1:b4a::/48
+  [0x2a0f85c10bba0000n, 0x0000000000000000n, 48, direct], // 2a0f:85c1:bba::/48
   [0x2a0f940061100000n, 0x0000000000000000n, 48, direct], // 2a0f:9400:6110::/48
+  [0x2a0f940061630000n, 0x0000000000000000n, 48, direct], // 2a0f:9400:6163::/48
   [0x2a0f940077000000n, 0x0000000000000000n, 48, direct], // 2a0f:9400:7700::/48
   [0x2a0fac0000000000n, 0x0000000000000000n, 29, direct], // 2a0f:ac00::/29
   [0x2a102f00015a0000n, 0x0000000000000000n, 48, direct], // 2a10:2f00:15a::/48
@@ -5737,7 +5729,6 @@ const ipv6NetworkRules = [
   [0x2a13180000800000n, 0x0000000000000000n, 44, direct], // 2a13:1800:80::/44
   [0x2a13180003000000n, 0x0000000000000000n, 44, direct], // 2a13:1800:300::/44
   [0x2a13180101800000n, 0x0000000000000000n, 43, direct], // 2a13:1801:180::/43
-  [0x2a13938000000000n, 0x0000000000000000n, 29, direct], // 2a13:9380::/29
   [0x2a13a5c3ff210000n, 0x0000000000000000n, 48, direct], // 2a13:a5c3:ff21::/48
   [0x2a13a5c3ff500000n, 0x0000000000000000n, 44, direct], // 2a13:a5c3:ff50::/44
   [0x2a13a5c718000000n, 0x0000000000000000n, 40, direct], // 2a13:a5c7:1800::/40
@@ -5746,40 +5737,44 @@ const ipv6NetworkRules = [
   [0x2a13a5c721100000n, 0x0000000000000000n, 48, direct], // 2a13:a5c7:2110::/48
   [0x2a13a5c721210000n, 0x0000000000000000n, 48, direct], // 2a13:a5c7:2121::/48
   [0x2a13a5c723010000n, 0x0000000000000000n, 48, direct], // 2a13:a5c7:2301::/48
+  [0x2a13a5c723030000n, 0x0000000000000000n, 48, direct], // 2a13:a5c7:2303::/48
   [0x2a13a5c723c00000n, 0x0000000000000000n, 42, direct], // 2a13:a5c7:23c0::/42
   [0x2a13a5c728010000n, 0x0000000000000000n, 48, direct], // 2a13:a5c7:2801::/48
   [0x2a13a5c728030000n, 0x0000000000000000n, 48, direct], // 2a13:a5c7:2803::/48
   [0x2a13aac4f0000000n, 0x0000000000000000n, 44, direct], // 2a13:aac4:f000::/44
-  [0x2a13df0000000000n, 0x0000000000000000n, 29, direct], // 2a13:df00::/29
   [0x2a1407c04a010000n, 0x0000000000000000n, 48, direct], // 2a14:7c0:4a01::/48
   [0x2a144c4100000000n, 0x0000000000000000n, 32, direct], // 2a14:4c41::/32
+  [0x2a1467c100200000n, 0x0000000000000000n, 44, direct], // 2a14:67c1:20::/44
   [0x2a1467c100700000n, 0x0000000000000000n, 46, direct], // 2a14:67c1:70::/46
   [0x2a1467c107030000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:703::/48
   [0x2a1467c107040000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:704::/48
   [0x2a1467c108000000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:800::/48
-  [0x2a1467c108020000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:802::/48
-  [0x2a1467c108040000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:804::/48
-  [0x2a1467c1080b0000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:80b::/48
   [0x2a1467c1a0100000n, 0x0000000000000000n, 44, direct], // 2a14:67c1:a010::/44
-  [0x2a1467c1a0200000n, 0x0000000000000000n, 47, direct], // 2a14:67c1:a020::/47
+  [0x2a1467c1a0200000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:a020::/48
   [0x2a1467c1a0240000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:a024::/48
   [0x2a1467c1a02a0000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:a02a::/48
   [0x2a1467c1a02f0000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:a02f::/48
+  [0x2a1467c1b0660000n, 0x0000000000000000n, 48, direct], // 2a14:67c1:b066::/48
+  [0x2a1467c1b1000000n, 0x0000000000000000n, 47, direct], // 2a14:67c1:b100::/47
   [0x2a1467c510000000n, 0x0000000000000000n, 36, direct], // 2a14:67c5:1000::/36
   [0x2a14758092020000n, 0x0000000000000000n, 47, direct], // 2a14:7580:9202::/47
   [0x2a14758092040000n, 0x0000000000000000n, 46, direct], // 2a14:7580:9204::/46
   [0x2a14758094000000n, 0x0000000000000000n, 39, direct], // 2a14:7580:9400::/39
   [0x2a14758096000000n, 0x0000000000000000n, 47, direct], // 2a14:7580:9600::/47
+  [0x2a14758096030000n, 0x0000000000000000n, 48, direct], // 2a14:7580:9603::/48
   [0x2a14758096040000n, 0x0000000000000000n, 47, direct], // 2a14:7580:9604::/47
-  [0x2a147580d0000000n, 0x0000000000000000n, 36, direct], // 2a14:7580:d000::/36
+  [0x2a14758096080000n, 0x0000000000000000n, 46, direct], // 2a14:7580:9608::/46
+  [0x2a147580d0000000n, 0x0000000000000000n, 37, direct], // 2a14:7580:d000::/37
+  [0x2a147580d8000000n, 0x0000000000000000n, 39, direct], // 2a14:7580:d800::/39
+  [0x2a147580da000000n, 0x0000000000000000n, 40, direct], // 2a14:7580:da00::/40
   [0x2a147580e2000000n, 0x0000000000000000n, 40, direct], // 2a14:7580:e200::/40
   [0x2a147580fa000000n, 0x0000000000000000n, 40, direct], // 2a14:7580:fa00::/40
   [0x2a1475810b300000n, 0x0000000000000000n, 48, direct], // 2a14:7581:b30::/48
   [0x2a1475810b400000n, 0x0000000000000000n, 48, direct], // 2a14:7581:b40::/48
   [0x2a1475810b500000n, 0x0000000000000000n, 48, direct], // 2a14:7581:b50::/48
   [0x2a1475810bbb0000n, 0x0000000000000000n, 48, direct], // 2a14:7581:bbb::/48
-  [0x2a1475810ffc0000n, 0x0000000000000000n, 48, direct], // 2a14:7581:ffc::/48
   [0x2a14758190100000n, 0x0000000000000000n, 44, direct], // 2a14:7581:9010::/44
+  [0x2a14758400000000n, 0x0000000000000000n, 36, direct], // 2a14:7584::/36
   [0x2a14758490000000n, 0x0000000000000000n, 36, direct], // 2a14:7584:9000::/36
   [0x2c0ff7a880110000n, 0x0000000000000000n, 48, direct], // 2c0f:f7a8:8011::/48
   [0x2c0ff7a880500000n, 0x0000000000000000n, 48, direct], // 2c0f:f7a8:8050::/48
@@ -5852,6 +5847,7 @@ const proxyRules = {
   "2017.hk": proxy,
   "2021hkcharter.com": proxy,
   "2047.name": proxy,
+  "2047.one": proxy,
   "2049bbs.xyz": proxy,
   "21andy.com": proxy,
   "21sextury.com": proxy,
@@ -5915,6 +5911,7 @@ const proxyRules = {
   "67.220.91.18": proxy,
   "67.220.91.23": proxy,
   "69.65.19.160": proxy,
+  "69shuba.cx": proxy,
   "6do.news": proxy,
   "6do.world": proxy,
   "6parkbbs.com": proxy,
@@ -6139,6 +6136,7 @@ const proxyRules = {
   "aofriend.com": proxy,
   "aojiao.org": proxy,
   "aolchannels.aol.com": proxy,
+  "aomedia.org": proxy,
   "aomiwang.com": proxy,
   "apartmentratings.com": proxy,
   "apartments.com": proxy,
@@ -6349,6 +6347,7 @@ const proxyRules = {
   "bcmorning.com": proxy,
   "bdsmvideos.net": proxy,
   "beaconevents.com": proxy,
+  "bearteach.com": proxy,
   "bebo.com": proxy,
   "beeg.com": proxy,
   "beepool.com": proxy,
@@ -6623,6 +6622,8 @@ const proxyRules = {
   "c3pool.com": proxy,
   "cableav.tv": proxy,
   "cablegatesearch.net": proxy,
+  "cachefly.com": proxy,
+  "cachefly.net": proxy,
   "cachinese.com": proxy,
   "cacnw.com": proxy,
   "cactusvpn.com": proxy,
@@ -6756,6 +6757,7 @@ const proxyRules = {
   "chatgpt.com": proxy,
   "chat.lmsys.org": proxy,
   "chatnook.com": proxy,
+  "chat.openai.com": proxy,
   "chaturbate.com": proxy,
   "checkgfw.com": proxy,
   "chengmingmag.com": proxy,
@@ -7060,6 +7062,7 @@ const proxyRules = {
   "curvefish.com": proxy,
   "cusp.hk": proxy,
   "cusu.hk": proxy,
+  "cutout.pro": proxy,
   "cutscenes.net": proxy,
   "cwb.gov.tw": direct,
   "cw.com.tw": proxy,
@@ -7525,6 +7528,7 @@ const proxyRules = {
   "faceless.me": proxy,
   "facesofnyfw.com": proxy,
   "facesoftibetanselfimmolators.info": proxy,
+  "factchecklab.org": proxy,
   "factpedia.org": proxy,
   "fail.hk": proxy,
   "faith100.org": proxy,
@@ -7585,7 +7589,6 @@ const proxyRules = {
   "fartit.com": proxy,
   "farwestchina.com": proxy,
   "fastestvpn.com": proxy,
-  "fastgpt.run": proxy,
   "fastpic.ru": proxy,
   "fastssh.com": proxy,
   "faststone.org": proxy,
@@ -7612,7 +7615,6 @@ const proxyRules = {
   "f-droid.org": proxy,
   "feedburner.com": proxy,
   "feeder.co": proxy,
-  "feedly.comfastgpt.run": proxy,
   "feeds.fileforum.com": proxy,
   "feedx.net": proxy,
   "feelssh.com": proxy,
@@ -7803,6 +7805,7 @@ const proxyRules = {
   "fscked.org": proxy,
   "fsurf.com": proxy,
   "ftchinese.com": proxy,
+  "ft.com": proxy,
   "ftp1.biz": proxy,
   "ftpserver.biz": proxy,
   "ftv.com.tw": proxy,
@@ -7886,6 +7889,7 @@ const proxyRules = {
   "g.co": proxy,
   "gcpnews.com": proxy,
   "gcr.io": proxy,
+  "gdaily.org": proxy,
   "gdbt.net": proxy,
   "gdzf.org": proxy,
   "geek-art.net": proxy,
@@ -7917,6 +7921,7 @@ const proxyRules = {
   "getmdl.io": proxy,
   "getoutline.org": proxy,
   "get.page": proxy,
+  "getsession.org": proxy,
   "getsocialscope.com": proxy,
   "getsync.com": proxy,
   "gettr.com": proxy,
@@ -7943,6 +7948,7 @@ const proxyRules = {
   "gigporno.ru": proxy,
   "girlbanker.com": proxy,
   "gitbook.io": proxy,
+  "githubassets.com": proxy,
   "github.blog": proxy,
   "github.com": proxy,
   "githubcopilot.com": proxy,
@@ -8018,6 +8024,7 @@ const proxyRules = {
   "goofind.com": proxy,
   "google.ae": proxy,
   "google.am": proxy,
+  "googleapis.com": proxy,
   "googleapps.com": proxy,
   "googlearth.com": proxy,
   "googleartproject.com": proxy,
@@ -9093,7 +9100,6 @@ const proxyRules = {
   "manyvoices.news": proxy,
   "maolin-nsa.gov.tw": direct,
   "maplew.com": proxy,
-  "maps.googleapis.com": proxy,
   "marc.info": proxy,
   "marguerite.su": proxy,
   "martau.com": proxy,
@@ -9332,6 +9338,7 @@ const proxyRules = {
   "murmur.tw": proxy,
   "musicade.net": proxy,
   "music.jwmusic.org": direct,
+  "musixmatch.com": proxy,
   "muslimvideo.com": proxy,
   "muzi.com": proxy,
   "muzi.net": proxy,
@@ -9456,6 +9463,7 @@ const proxyRules = {
   "netflav.com": proxy,
   "netflix.com": proxy,
   "netflix.net": proxy,
+  "netlify.app": proxy,
   "netme.cc": proxy,
   "netsarang.com": proxy,
   "netsneak.com": proxy,
@@ -9712,7 +9720,6 @@ const proxyRules = {
   "onthehunt.com": proxy,
   "ontrac.com": proxy,
   "oopsforum.com": proxy,
-  "openai.com": proxy,
   "openallweb.com": proxy,
   "open.com.hk": proxy,
   "opendemocracy.net": proxy,
@@ -9723,6 +9730,7 @@ const proxyRules = {
   "openleaks.org": proxy,
   "opensea.io": proxy,
   "opensource.google": proxy,
+  "open.spotify.com": proxy,
   "openstreetmap.org": proxy,
   "opentech.fund": proxy,
   "openvpn.net": proxy,
@@ -9928,6 +9936,7 @@ const proxyRules = {
   "politicalconsultation.org": proxy,
   "politiscales.net": proxy,
   "poloniex.com": proxy,
+  "polymarket.com": proxy,
   "polymerhk.com": proxy,
   "polymer-project.org": proxy,
   "poolbinance.com": proxy,
@@ -9978,7 +9987,7 @@ const proxyRules = {
   "powerphoto.org": proxy,
   "ppy.sh": proxy,
   "prayforchina.net": proxy,
-  "premeforwindows7.com": proxy,
+  "prcleader.org": proxy,
   "premproxy.com": proxy,
   "presentation.new": proxy,
   "presentationzen.com": proxy,
@@ -10550,6 +10559,7 @@ const proxyRules = {
   "soundcloud.com": proxy,
   "soundofhope.kr": proxy,
   "soundofhope.org": proxy,
+  "soundon.fm": proxy,
   "soup.io": proxy,
   "soupofmedia.com": proxy,
   "sourceforge.net": proxy,
@@ -10580,7 +10590,6 @@ const proxyRules = {
   "spiderpool.com": proxy,
   "spike.com": proxy,
   "spotflux.com": proxy,
-  "spotify.com": proxy,
   "spreadsheet.new": proxy,
   "spreadshirt.es": proxy,
   "spreaker.com": proxy,
@@ -10845,6 +10854,7 @@ const proxyRules = {
   "tfhub.dev": proxy,
   "tfiflve.com": proxy,
   "t-g.com": proxy,
+  "tg-me.com": proxy,
   "thaicn.com": proxy,
   "theatlantic.com": proxy,
   "theatrum-belli.com": proxy,
@@ -10871,7 +10881,6 @@ const proxyRules = {
   "thehindu.com": proxy,
   "thehun.net": proxy,
   "theinitium.com": proxy,
-  "themoviedb.org": proxy,
   "thenewslens.com": proxy,
   "thepiratebay.org": proxy,
   "theporndude.com": proxy,
@@ -11096,7 +11105,6 @@ const proxyRules = {
   "tpi.org.tw": proxy,
   "tracfone.com": proxy,
   "tradingview.com": proxy,
-  "translate.googleapis.com": proxy,
   "translate.google.cn": direct,
   "translate.goog": proxy,
   "transparency.org": proxy,
@@ -11263,6 +11271,7 @@ const proxyRules = {
   "twitzap.com": proxy,
   "twiyia.com": proxy,
   "tw.jiepang.com": proxy,
+  "twkan.com": proxy,
   "twnorth.org.tw": proxy,
   "tw-npo.org": proxy,
   "twreporter.org": proxy,
@@ -11701,7 +11710,6 @@ const proxyRules = {
   "wikiversity.org": proxy,
   "wikivoyage.org": proxy,
   "wikiwand.com": proxy,
-  "wikiwiki.jp": proxy,
   "wiktionary.org": proxy,
   "wildammo.com": proxy,
   "williamhill.com": proxy,
@@ -11798,6 +11806,7 @@ const proxyRules = {
   "www.dmm.com": proxy,
   "www.dwheeler.com": proxy,
   "www.eastturkistan.net": proxy,
+  "www.ettoday.net": direct,
   "www.exblog.jp": direct,
   "www.gmiddle.com": proxy,
   "www.gmiddle.net": proxy,
@@ -11834,6 +11843,7 @@ const proxyRules = {
   "wzyboy.im": proxy,
   "x24hr.com": proxy,
   "x3guide.com": proxy,
+  "x.ai": proxy,
   "xanga.com": proxy,
   "x-art.com": proxy,
   "xa.yimg.com": proxy,
@@ -12410,4 +12420,3 @@ if (typeof process !== 'undefined' && process.argv.includes('test')) {
 
   runTests();
 }
-
