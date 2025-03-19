@@ -7,10 +7,11 @@ const proxy = "proxy";
 
 const DIRECT = "DIRECT";
 var proxyBehaviors = {
-  proxy: "SOCKS5 127.0.0.1:1080", // the default proxy
+  proxy: "SOCKS5 127.0.0.1:1080", // 默认代理
   direct: DIRECT,
   blocked: "PROXY 0.0.0.0:0",
-  // "companyProxy": "PROXY 192.168.1.1:8080", // domains list in `domain-rules-companyProxy.txt` will use this proxy setting
+  "http_proxy": "PROXY 127.0.0.1:3128",
+  "companyProxy": "PROXY 192.168.1.1:8080", // `domain-rules-companyProxy.txt` 中的域名将使用此代理设置
 };
 const default_behavior = DIRECT + "; " + proxyBehaviors[proxy];
 
