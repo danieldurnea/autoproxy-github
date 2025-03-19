@@ -1,11 +1,5 @@
 // -*- mode: javascript; js-indent-level: 2 -*-
 // vim: set filetype=javascript tabstop=2 shiftwidth=2 expandtab:
-
-const direct = "direct";
-const blocked = "blocked";
-const proxy = "proxy";
-
-const DIRECT = "DIRECT";
 var proxyBehaviors = {
   proxy: "SOCKS5 127.0.0.1:1080", // 默认代理
   direct: DIRECT,
