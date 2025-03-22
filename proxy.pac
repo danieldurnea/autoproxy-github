@@ -1,10 +1,10 @@
 // -*- mode: javascript; js-indent-level: 2 -*-
 // vim: set filetype=javascript tabstop=2 shiftwidth=2 expandtab:
 var proxyBehaviors = {
-  proxy: "SOCKS 127.0.0.1:9050", // 默认代理
+  proxy: "SOCKS 127.0.0.1:9080", // 默认代理
   direct: DIRECT,
   blocked: "PROXY 0.0.0.0:0",
-  "http_proxy": "PROXY 127.0.0.1:9080",
+  "http_proxy": "PROXY 127.0.0.1:3128",
   "companyProxy": "PROXY 192.168.1.1:8080", // `domain-rules-companyProxy.txt` 中的域名将使用此代理设置
 };
 const default_behavior = DIRECT + "; " + proxyBehaviors[proxy];
