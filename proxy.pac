@@ -1,13 +1,17 @@
-// -*- mode: javascript; js-indent-level: 2 -*-
-// vim: set filetype=javascript tabstop=2 shiftwidth=2 expandtab:
-var proxyBehaviors = {
-  proxy: "SOCKS 127.0.0.1:9080", // 默认代理
-  direct: DIRECT,
-  blocked: "PROXY 0.0.0.0:0",
-  "http_proxy": "PROXY 127.0.0.1:3128",
-  "companyProxy": "PROXY 192.168.1.1:8080", // `domain-rules-companyProxy.txt` 中的域名将使用此代理设置
-};
-const default_behavior = DIRECT + "; " + proxyBehaviors[proxy];
+###                       
+function FindProxyForURL(url, host)
+{
+    if (shExpMatch(host,"*.onion"))
+    {
+        return "SOCKS 127.0.0.1:9050";
+    }
+
+    if (shExpMatch(host,"*.i2p"))
+    {
+        return "PROXY 127.0.0.1:4444";
+    }
+    return "DIRECT";
+}
 
 const ipv4Pattern = /^\d{1,3}(\.\d{1,3}){3}$/;
 const ipv6Pattern = /^[a-fA-F0-9:]+$/;
@@ -12411,7 +12415,19 @@ if (typeof process !== 'undefined' && process.argv.includes('test')) {
     assertDirectHost("114.114.114.114");
     assertBlockedHost("www.whitehouse.com");
     assertBlockedHost("adservice.google.com.xx")
-  }
+  }                        
+function FindProxyForURL(url, host)
+{
+    if (shExpMatch(host,"*.onion"))
+    {
+        return "SOCKS 127.0.0.1:9050";
+    }
 
+    if (shExpMatch(host,"*.i2p"))
+    {
+        return "PROXY 127.0.0.1:4444";
+    }
+    return "DIRECT";
+}
   runTests();
 }
