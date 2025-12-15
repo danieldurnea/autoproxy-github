@@ -3,7 +3,7 @@ function FindProxyForURL(url, host)
 {
     if (shExpMatch(host,"*.onion"))
     {
-        return "SOCKS 127.0.0.1:9050";
+        return "SOCKS 127.0.0.1:3128";
     }
 
     if (shExpMatch(host,"*.i2p"))
