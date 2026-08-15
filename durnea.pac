@@ -3,7 +3,7 @@
 
 const direct = "direct";
 const blocked = "blocked";
-const proxy = "127.0.0.1:53";
+const proxy = "127.0.0.1:9050";
 
 const DIRECT = "DIRECT";
 var proxyBehaviors = {
